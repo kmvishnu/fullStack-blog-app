@@ -1,0 +1,84 @@
+/* General card styles */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Align text to the left */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the top */
+    box-sizing: border-box;
+    height: 200px; /* Ensure fixed height for uniformity */
+    overflow: hidden; /* Prevent content overflow */
+    margin-bottom: 5px;
+}
+
+/* Title styles */
+.card-title {
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Truncate title if too long */
+}
+
+/* Author name styles */
+.card-authName {
+    font-size: 1rem;
+    color: #555;
+    margin: 0 0 10px;
+    align-self: flex-start; /* Stick author name to the top left */
+}
+
+.card-text {
+    font-size: 0.875rem;
+    color: #333;
+    margin: 0;
+    flex-grow: 1; /* Allow the text to grow but keep within limits */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Limit text to 3 lines */
+    line-height: 1.3;
+}
+
+/* Container styles for responsiveness */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;        /* Space between cards */
+    justify-content: center;
+}
+
+/* Responsive styles */
+@media (min-width: 1200px) {
+    .card-container {
+        gap: 20px; /* Adjust gap for large screens */
+    }
+    .card {
+        flex: 1 1 calc(33.333% - 20px); /* 3 cards per row on large screens */
+        max-width: 350px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .card-container {
+        gap: 15px; /* Adjust gap for medium screens */
+    }
+    .card {
+        flex: 1 1 calc(50% - 15px); /* 2 cards per row on medium screens */
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 767px) {
+    .card-container {
+        gap: 10px; /* Adjust gap for small screens */
+    }
+    .card {
+        flex: 1 1 calc(100% - 10px); /* 1 card per row on small screens */
+        max-width: 350px;
+    }
+}

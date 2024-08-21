@@ -1,8 +1,15 @@
 import React from 'react'
+import BodyOfBlogs from '../BodyOfBlogs/BodyOfBlogs'
+import Header from '../Header/Header'
+import News from '../News/News'
 
 function Home() {
   return (
-    <div>Welcome Home</div>
+    <div style={{backgroundColor:"#000"}}>
+    <Header/>
+    <News/>
+    <BodyOfBlogs/>
+    </div>
   )
 }
 
