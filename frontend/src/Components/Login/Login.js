@@ -22,7 +22,6 @@ const Login = () => {
     }, [email, password]);
 
     useEffect(() => {
-        console.log(email, password)
         setIsFormValid(isEmailValid && isPasswordValid);
     }, [isEmailValid, isPasswordValid]);
 
@@ -59,7 +58,6 @@ const Login = () => {
             email: email,
             password: password,
         };
-        console.log("userData", userData)
        
     };
 

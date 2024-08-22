@@ -1,10 +1,9 @@
-const bcrypt = require('bcryptjs'); // Import bcrypt for password comparison
+const bcrypt = require('bcryptjs'); 
 const jwt = require('jsonwebtoken');
-const { saveRefreshToken } = require("../Common/redisClient"); // Destructure if you exported multiple things
-const { verifyUser, createUser } = require("../Components/UserComponent"); // Destructure if you exported multiple things
+const { saveRefreshToken } = require("../Common/redisClient"); 
+const { verifyUser, createUser } = require("../Components/UserComponent"); 
 
 const login = async (req, res) => {
-  console.log("testtt");
   const { email, password } = req.body;
 
   try {

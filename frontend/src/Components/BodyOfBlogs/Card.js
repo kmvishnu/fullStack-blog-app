@@ -1,5 +1,5 @@
 import React from 'react';
-import './Card.css';  // Import the CSS file for styling
+import './Card.css'; 
 
 const Card = ({ title, authName, text }) => {
     return (

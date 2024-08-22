@@ -100,7 +100,6 @@ const SignUp = () => {
             password: password,
             confirmPassword: confirmPassword
         };
-        console.log("userData", userData)
       
     };
 

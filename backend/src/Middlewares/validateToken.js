@@ -1,6 +1,6 @@
 const jwt = require ("jsonwebtoken")
 
-export const validateToken = (req, res, next) => {
+const validateToken = (req, res, next) => {
 
     let authToken = req.headers.authorization;
 
@@ -34,3 +34,5 @@ export const validateToken = (req, res, next) => {
             .json({ success: false, message: "Invalid token!" });
     }
 }
+
+module.exports = {validateToken}
