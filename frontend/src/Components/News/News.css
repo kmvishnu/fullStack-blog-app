@@ -1,0 +1,26 @@
+/* News.css */
+
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'cursive';
+}
+
+/* Header Styles */
+.news-container {
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+    height: 30vh;            /* Full viewport height */
+    background-color: #333;  /* Dark background color */
+    color: white;            /* White text color */
+    text-align: center;       /* Center text inside the container */
+    margin:20px;
+    border-radius: 5px;
+}
+
+h3 {
+    margin: 0;                /* Remove default margin of h2 */
+    font-size: 0.8rem;        /* Adjust font size if necessary */
+    line-height: 1.4;         /* Adjust line height if necessary */
+}

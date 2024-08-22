@@ -1,0 +1,53 @@
+/* Styles for the popup overlay (background) */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Styles for the popup content */
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 600px;   /* Fixed width for larger screens */
+    height: 400px;  /* Fixed height */
+    box-sizing: border-box;
+    text-align: left;
+    overflow-y: auto; /* Scrollable if content overflows */
+    position: relative;
+}
+
+/* Close button styling */
+.close-popup-button {
+    background-color: #ff5f5f;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    position: absolute; /* Positioning within the popup */
+    top: 10px;
+    right: 10px;
+    transition: background-color 0.3s;
+}
+
+.close-popup-button:hover {
+    background-color: #ff3f3f;
+}
+
+/* Responsive styles */
+@media (max-width: 480px) {
+    .popup-content {
+        width: 90%; /* Reduce width on small screens */
+        height: 60%; /* Reduce height on small screens */
+    }
+}
