@@ -88,6 +88,7 @@ const signUp = async (req, res) => {
       message: "Please provide a valid email address.",
     });
   }
+  
 
   try {
     const result = await createUser(name, email, password);

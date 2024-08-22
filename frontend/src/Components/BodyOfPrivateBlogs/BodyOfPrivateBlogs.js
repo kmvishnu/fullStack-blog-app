@@ -2,26 +2,27 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { useBlogs } from "../../Hooks/useBlogs";
 
-function BodyOfBlogs() {
-  const { viewBlogs,blogs } = useBlogs();
+function BodyOfPrivateBlogs() {
+  const { viewPrivateBlogs,privateBlogs } = useBlogs();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBlogs = async () => {
       setLoading(true);
-      await viewBlogs();
+      await viewPrivateBlogs();
       setLoading(false);
     };
     fetchBlogs();
-  }, [viewBlogs]);
+  }, [viewPrivateBlogs]);
 
   return loading ? (
     <h2>Loading...</h2>
   ) : (
     <div style={{ backgroundColor: "#000" }} className="card-container">
-      {blogs?.map((obj) => {
+      {privateBlogs?.map((obj) => {
         return (
           <Card
+          id={obj._id}
             title={obj.title}
             authName={obj.userName}
             text={obj.content}
@@ -32,4 +33,4 @@ function BodyOfBlogs() {
   );
 }
 
-export default BodyOfBlogs;
+export default BodyOfPrivateBlogs;

@@ -82,6 +82,10 @@ p {
 
 }
 
+h2{
+    cursor: pointer;
+  }
+
 @media (max-width: 500px) {
     .login-form {
         padding: 15px;

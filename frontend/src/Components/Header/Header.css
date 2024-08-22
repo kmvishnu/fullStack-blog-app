@@ -16,19 +16,38 @@ body {
     top: 0;
     width: 100%;
     z-index: 1000; /* Make sure it's on top of other content */
-    
+    /* border: 1px solid red; Temporary border for debugging */
 }
 
 /* Logo Styling */
 .logo {
     font-size: 20px;
     font-weight: bold;
+    cursor: pointer;
+    /* border: 1px solid green; Temporary border for debugging */
+}
+
+/* User Icon Styling */
+.user-icon {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: hsl(61, 100%, 50%);
+    color: rgb(6, 6, 6);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    /* border: 1px solid blue; Temporary border for debugging */
 }
 
 /* Hamburger Icon Styling */
 .hamburger {
     font-size: 20px;
     cursor: pointer;
+    /* border: 1px solid yellow; Temporary border for debugging */
 }
 
 /* Menu Popup Styling */
@@ -54,3 +73,17 @@ body {
 .menu p:hover {
     background-color: #f0f0f0;
 }
+
+.create-blog-button {
+    margin-right: 10px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .create-blog-button:hover {
+    background-color: #0056b3;
+  }

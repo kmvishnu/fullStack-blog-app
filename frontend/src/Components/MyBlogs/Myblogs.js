@@ -2,15 +2,15 @@ import React from 'react'
 import BodyOfBlogs from '../BodyOfBlogs/BodyOfBlogs'
 import Header from '../Header/Header'
 import News from '../News/News'
+import BodyOfPrivateBlogs from '../BodyOfPrivateBlogs/BodyOfPrivateBlogs'
 
-function Home() {
+function MyBlogs() {
   return (
     <div style={{backgroundColor:"#000", minHeight: "100vh"}}>
-    <Header/>
-    <News/>
-    <BodyOfBlogs/>
+      <Header isMyBlogsActive={true} />
+    <BodyOfPrivateBlogs/>
     </div>
   )
 }
 
-export default Home
+export default MyBlogs

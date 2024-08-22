@@ -81,6 +81,37 @@ p{
   cursor: pointer;
 }
 
+h2{
+  cursor: pointer;
+}
+.popup {
+  position: absolute;
+  top: -50px; /* Adjust to ensure it stays above the SignUp button */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px; /* Fixed width for larger screens */
+  max-width: 90%; /* Ensures it adapts to smaller screens */
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.popup p {
+  margin: 0;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.popup p:hover {
+  background-color: #f0f0f0;
+}
+
+
   
   @media (max-width: 500px) {
     .signUp-form {
@@ -93,6 +124,12 @@ p{
   
     button {
       padding: 8px;
+    }
+    .popup {
+      width: auto; /* Allows the width to adjust naturally */
+      left: 10%; /* Keeps the popup within the viewport */
+      right: 10%; /* Keeps the popup within the viewport */
+      transform: none; /* Removes centering on very small screens */
     }
   }
 
