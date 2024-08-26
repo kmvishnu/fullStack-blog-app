@@ -1,5 +1,5 @@
 const config = {
-  apiBaseUrl: "http://localhost:3300",
+  apiBaseUrl: "http://fullstack-blog-app-production.up.railway.app",
 };
 
 export default config;
