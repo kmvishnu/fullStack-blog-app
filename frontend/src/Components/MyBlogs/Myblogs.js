@@ -1,7 +1,5 @@
 import React from 'react'
-import BodyOfBlogs from '../BodyOfBlogs/BodyOfBlogs'
 import Header from '../Header/Header'
-import News from '../News/News'
 import BodyOfPrivateBlogs from '../BodyOfPrivateBlogs/BodyOfPrivateBlogs'
 
 function MyBlogs() {
