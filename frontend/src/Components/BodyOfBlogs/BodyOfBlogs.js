@@ -19,7 +19,7 @@ function BodyOfBlogs() {
     <h2>Loading...</h2>
   ) : (
     <div style={{ backgroundColor: "#000" }} className="card-container">
-      {blogs?.map((obj) => {
+      {blogs?.map((obj,key) => {
         return (
           <Card
             title={obj.title}

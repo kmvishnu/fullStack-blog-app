@@ -12,7 +12,6 @@ const Header = (props) => {
   const { logoutUser } = useUser();
 
   const userName = useSelector((state) => state.user.user);
-  console.log("userrr", userName);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -43,7 +42,7 @@ const Header = (props) => {
       )}
       {userName ? (
         <div className="user-icon" onClick={toggleMenu}>
-          {userName.charAt(1).toUpperCase()}
+          {userName.charAt(0).toUpperCase()}
         </div>
       ) : (
         <div className="hamburger" onClick={toggleMenu}>
