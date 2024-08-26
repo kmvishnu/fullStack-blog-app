@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import BlogPopUp from "../BlogPopUp/BlogPopUp"; 
 import { useUser } from "../../Hooks/useUser";
 
@@ -9,7 +9,6 @@ const Header = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false); 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { logoutUser } = useUser();
 
   const userName = useSelector((state) => state.user.user);

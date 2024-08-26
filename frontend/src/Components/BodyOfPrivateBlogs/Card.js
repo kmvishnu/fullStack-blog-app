@@ -8,7 +8,7 @@ const Card = ({ id, title, authName, text }) => {
     console.log("carrrrd",id)
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isEditPopupVisible, setIsEditPopupVisible] = useState(false);
-  const { viewBlogs, viewPrivateBlogs, deleteBlog} = useBlogs();
+  const { viewPrivateBlogs, deleteBlog} = useBlogs();
 
 
   const handleViewClick = () => {

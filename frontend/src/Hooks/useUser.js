@@ -1,11 +1,10 @@
 import axios from "axios";
 import config from "../config";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { clearToken, setToken } from "../Features/User/userSlice";
 
 export const useUser = () => {
-  const userName = useSelector((state) => state.user.name);
-  const userPassword = useSelector((state) => state.user.password);
+
   const dispatch = useDispatch();
 
   const signUpUser = async (userData) => {

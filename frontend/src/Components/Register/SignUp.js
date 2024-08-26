@@ -1,13 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import "./SignUp.css";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../Hooks/useUser";
 
-
 const SignUp = () => {
   const navigate = useNavigate();
   const { signUpUser } = useUser();
-
 
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
@@ -30,24 +28,10 @@ const SignUp = () => {
   const [nameTouched, setNameTouched] = useState(false);
 
   const [isFormValid, setIsFormValid] = useState(false);
-  const [isSignupSuccess,setIsSignupSuccess] = useState(false);
+  const [isSignupSuccess, setIsSignupSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
-
   const buttonRef = useRef(null);
-
-  useEffect(() => {
-    setIsEmailValid(validateEmail(email));
-    setIsPasswordValid(validatePassword(password));
-    setIsConfirmPasswordValid(validateConfirmPassword(confirmPassword));
-    setIsNameValid(validateName(name));
-  }, [email, password, name, confirmPassword]);
-
-  useEffect(() => {
-    setIsFormValid(
-      isEmailValid && isPasswordValid && isNameValid && isConfirmPasswordValid
-    );
-  }, [isEmailValid, isPasswordValid, isNameValid, isConfirmPasswordValid]);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -59,19 +43,6 @@ const SignUp = () => {
       return false;
     } else {
       setEmailError("");
-      return true;
-    }
-  };
-
-  const validateConfirmPassword = (confirmPassword) => {
-    if (!confirmPassword) {
-      setConfirmPasswordError("Confirm Password is required");
-      return false;
-    } else if (confirmPassword !== password) {
-      setConfirmPasswordError("Passwords are not maching");
-      return false;
-    } else {
-      setConfirmPasswordError("");
       return true;
     }
   };
@@ -102,6 +73,35 @@ const SignUp = () => {
     }
   };
 
+  const validateConfirmPassword = useCallback(
+    (confirmPassword) => {
+      if (!confirmPassword) {
+        setConfirmPasswordError("Confirm Password is required");
+        return false;
+      } else if (confirmPassword !== password) {
+        setConfirmPasswordError("Passwords are not matching");
+        return false;
+      } else {
+        setConfirmPasswordError("");
+        return true;
+      }
+    },
+    [password] // Dependency on password
+  );
+
+  useEffect(() => {
+    setIsEmailValid(validateEmail(email));
+    setIsPasswordValid(validatePassword(password));
+    setIsConfirmPasswordValid(validateConfirmPassword(confirmPassword));
+    setIsNameValid(validateName(name));
+  }, [email, password, name, confirmPassword, validateConfirmPassword]);
+
+  useEffect(() => {
+    setIsFormValid(
+      isEmailValid && isPasswordValid && isNameValid && isConfirmPasswordValid
+    );
+  }, [isEmailValid, isPasswordValid, isNameValid, isConfirmPasswordValid]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const userData = {
@@ -111,18 +111,16 @@ const SignUp = () => {
       confirmPassword: confirmPassword,
     };
     try {
-        setLoading(true);
-        const response = await signUpUser(userData);
-        if (response.status === "success") {
-            setIsSignupSuccess(true)
+      setLoading(true);
+      const response = await signUpUser(userData);
+      if (response.status === "success") {
+        setIsSignupSuccess(true);
         setLoading(false);
-
-        }
-      } catch (error) {
-        console.error("Error during signUp:", error);
-        setLoading(false);
-
       }
+    } catch (error) {
+      console.error("Error during signUp:", error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -186,8 +184,13 @@ const SignUp = () => {
             <p className="error-message">{confirmPasswordError}</p>
           )}
         </div>
-        <button type="submit" className="signUp-button" disabled={!isFormValid} ref={buttonRef} >
-          {loading?"Loading...":"SignUp"}
+        <button
+          type="submit"
+          className="signUp-button"
+          disabled={!isFormValid}
+          ref={buttonRef}
+        >
+          {loading ? "Loading..." : "SignUp"}
         </button>
         <p
           onClick={() => {
@@ -202,7 +205,10 @@ const SignUp = () => {
         <div
           className="popup"
           style={{
-            top: buttonRef.current?.offsetTop - buttonRef.current?.offsetHeight - 10,
+            top:
+              buttonRef.current?.offsetTop -
+              buttonRef.current?.offsetHeight -
+              10,
             left: buttonRef.current?.offsetLeft,
           }}
         >
