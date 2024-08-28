@@ -3,11 +3,48 @@ import "./BlogPopUp.css";
 import { useBlogs } from "../../Hooks/useBlogs";
 
 const BlogPopUp = ({ closePopup, blogData = null }) => {
-  const [title, setTitle] = useState(blogData?.title || "");
-  const [content, setContent] = useState(blogData?.content || "");
   const [loading, setLoading] = useState(false);
 
-  const { createBlog, editBlog } = useBlogs();  
+  const [title, setTitle] = useState(blogData?.title || "");
+  const [isTitleValid, setIsTitleValid] = useState(false);
+  const [titleError, setTitleError] = useState("");
+  const [titleTouched, setTitleTouched] = useState(false);
+
+  const [content, setContent] = useState(blogData?.content || "");
+  const [isContentValid, setIsContentValid] = useState(false);
+  const [contentError, setContentError] = useState("");
+  const [contentTouched, setContentTouched] = useState(false);
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+
+  const { createBlog, editBlog } = useBlogs();
+
+  const validateTitle = (title) => {
+    if (!title) {
+      setTitleError("title is required");
+      return false;
+    } else if (title.length <= 2 || title.length >= 30) {
+      setTitleError("Title must be between 2 and 30 characters");
+      return false;
+    } else {
+      setTitleError("");
+      return true;
+    }
+  };
+
+  const validateContent = (content) => {
+    if (!content) {
+      setContentError("content is required");
+      return false;
+    } else if (content.length <= 10 || content.length >= 30) {
+      setContentError("Content must be between 10 and 500 characters");
+      return false;
+    } else {
+      setContentError("");
+      return true;
+    }
+  };
 
   useEffect(() => {
     if (blogData) {
@@ -15,6 +52,15 @@ const BlogPopUp = ({ closePopup, blogData = null }) => {
       setContent(blogData.content);
     }
   }, [blogData]);
+
+  useEffect(() => {
+    setIsTitleValid(validateTitle(title));
+    setIsContentValid(validateContent(content));
+  }, [title, content]);
+
+  useEffect(() => {
+    setIsFormValid(isTitleValid && isContentValid);
+  }, [isTitleValid, isContentValid]);
 
   const handleSubmit = async () => {
     const blogPayload = {
@@ -37,8 +83,8 @@ const BlogPopUp = ({ closePopup, blogData = null }) => {
       } else {
         response = await createBlog(blogPayload);
       }
-  
-      if (response.status === true || response.status==='success') {
+
+      if (response.status === true || response.status === "success") {
         setLoading(false);
         closePopup();
       }
@@ -58,18 +104,31 @@ const BlogPopUp = ({ closePopup, blogData = null }) => {
           className="blog-title-input"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          onBlur={() => setTitleTouched(true)}
+          required
         />
+        {titleTouched && titleError && (
+          <p className="error-message">{titleError}</p>
+        )}
         <textarea
           placeholder="Enter blog content..."
           className="blog-content-input"
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          onBlur={() => setContentTouched(true)}
+          required
         ></textarea>
+        {contentTouched && contentError && (
+          <p className="error-message">{contentError}</p>
+        )}
         <div className="popup-buttons">
           <button onClick={closePopup}>Cancel</button>
-          <button onClick={handleSubmit} disabled={loading}>
-            {loading ? "Saving..." : "Submit"}
-          </button>
+          <button
+          onClick={handleSubmit}
+          disabled={!isFormValid}
+        >
+          {loading ? "Loading..." : "SignUp"}
+        </button>
         </div>
       </div>
     </div>

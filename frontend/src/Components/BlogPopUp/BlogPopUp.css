@@ -64,4 +64,9 @@
   .popup-buttons button:hover {
     background-color: #0056b3;
   }
+
+  .popup-buttons button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
   
