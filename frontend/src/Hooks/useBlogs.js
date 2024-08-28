@@ -1,12 +1,10 @@
 import { useCallback, useState } from "react";
 import api, { useAxiosInterceptor } from "../Components/Common/axios";
-import { useDispatch } from "react-redux";
 
 export const useBlogs = () => {
   useAxiosInterceptor(); // Set up the interceptor
   const [blogs, setBlogs] = useState([]);
   const [privateBlogs, setPrivateBlogs] = useState([]);
-  const dispatch = useDispatch();
 
   const viewBlogs = useCallback(async () => {
     try {
@@ -15,7 +13,7 @@ export const useBlogs = () => {
     } catch (error) {
       console.error("Error fetching blogs", error);
     }
-  }, [dispatch]);
+  }, []);
 
   const viewPrivateBlogs = useCallback(async () => {
     try {
@@ -23,7 +21,7 @@ export const useBlogs = () => {
       setPrivateBlogs(response.data);
     } catch (error) {
     }
-  }, [dispatch]);
+  }, []);
 
   const createBlog = async (payload) => {
     try {
