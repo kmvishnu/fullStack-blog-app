@@ -9,21 +9,21 @@ export const useBlogs = () => {
 
   const viewBlogs = useCallback(async () => {
     try {
-      const response = await api.get("/viewAllBlogs");
+      const response = await api.get("/viewAllBlogs",dispatch);
       setBlogs(response.data);
     } catch (error) {
       console.error("Error fetching blogs", error);
     }
-  }, []);
+  }, [dispatch]);
 
   const viewPrivateBlogs = useCallback(async () => {
     try {
-      const response = await api.get("/viewPrivateBlogs");
+      const response = await api.get("/viewPrivateBlogs",dispatch);
       setPrivateBlogs(response.data);
     } catch (error) {
       console.error("Error fetching private blogs", error);
     }
-  }, []);
+  }, [dispatch]);
 
   const createBlog = async (payload) => {
     try {
@@ -41,7 +41,6 @@ export const useBlogs = () => {
   };
 
   const editBlog = async (payload) => {
-    console.log("payload", payload);
     try {
       const response = await api.put("/editBlog", payload, {
         dispatch,
@@ -67,7 +66,6 @@ export const useBlogs = () => {
     } finally {
     }
   };
-
 
   return {
     privateBlogs,

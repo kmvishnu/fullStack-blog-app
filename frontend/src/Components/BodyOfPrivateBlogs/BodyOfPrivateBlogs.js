@@ -1,34 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Card from "./Card";
-import { useBlogs } from "../../Hooks/useBlogs";
 
-function BodyOfPrivateBlogs() {
-  const { viewPrivateBlogs,privateBlogs } = useBlogs();
-  const [loading, setLoading] = useState(true);
+function BodyOfPrivateBlogs(props) {
 
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      setLoading(true);
-      await viewPrivateBlogs();
-      setLoading(false);
-    };
-    fetchBlogs();
-  }, [viewPrivateBlogs]);
 
-  return loading ? (
-    <h2>Loading...</h2>
-  ) : (
+
+  if (props.loading) {
+    return <h2>Loading...</h2>;
+  }
+
+  return (
     <div style={{ backgroundColor: "#000" }} className="card-container">
-      {privateBlogs?.map((obj) => {
-        return (
-          <Card
+      {props.privateBlogs?.map((obj, key) => (
+        <Card
+        refreshBlogs={props.refreshBlogs}
+          key={key}
           id={obj._id}
-            title={obj.title}
-            authName={obj.userName}
-            text={obj.content}
-          />
-        );
-      })}
+          title={obj.title}
+          authName={obj.userName}
+          text={obj.content}
+        />
+      ))}
     </div>
   );
 }

@@ -1,84 +1,138 @@
-/* General card styles */
+
 .card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: left; /* Align text to the left */
+    text-align: left; 
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align content to the top */
+    justify-content: flex-start; 
     box-sizing: border-box;
-    height: 200px; /* Ensure fixed height for uniformity */
-    overflow: hidden; /* Prevent content overflow */
+    height: 200px; 
+    overflow: hidden; 
     margin-bottom: 5px;
 }
 
-/* Title styles */
+
 .card-title {
     font-size: 1.5rem;
     margin: 0 0 10px;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Truncate title if too long */
+    text-overflow: ellipsis; 
 }
 
-/* Author name styles */
+
 .card-authName {
     font-size: 1rem;
     color: #555;
     margin: 0 0 10px;
-    align-self: flex-start; /* Stick author name to the top left */
+    align-self: flex-start; 
 }
 
 .card-text {
     font-size: 0.875rem;
     color: #333;
     margin: 0;
-    flex-grow: 1; /* Allow the text to grow but keep within limits */
+    flex-grow: 1; 
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3; /* Limit text to 3 lines */
+    -webkit-line-clamp: 3; 
     line-height: 1.3;
 }
 
-/* Container styles for responsiveness */
+
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;        /* Space between cards */
+    gap: 10px;        
     justify-content: center;
 }
 
-/* Responsive styles */
+
 @media (min-width: 1200px) {
     .card-container {
-        gap: 20px; /* Adjust gap for large screens */
+        gap: 20px; 
     }
     .card {
-        flex: 1 1 calc(33.333% - 20px); /* 3 cards per row on large screens */
+        flex: 1 1 calc(33.333% - 20px); 
         max-width: 350px;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
     .card-container {
-        gap: 15px; /* Adjust gap for medium screens */
+        gap: 15px; 
     }
     .card {
-        flex: 1 1 calc(50% - 15px); /* 2 cards per row on medium screens */
+        flex: 1 1 calc(50% - 15px); 
         max-width: 350px;
     }
 }
 
 @media (max-width: 767px) {
     .card-container {
-        gap: 10px; /* Adjust gap for small screens */
+        gap: 10px; 
     }
     .card {
-        flex: 1 1 calc(100% - 10px); /* 1 card per row on small screens */
+        flex: 1 1 calc(100% - 10px); 
         max-width: 350px;
     }
 }
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 600px;   
+    height: 400px;  
+    box-sizing: border-box;
+    text-align: left;
+    overflow-y: auto; 
+    position: relative;
+}
+
+
+.close-popup-button {
+    background-color: #ff5f5f;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    position: absolute; 
+    top: 0;
+    right: 10px;
+    transition: background-color 0.3s;
+}
+
+.close-popup-button:hover {
+    background-color: #ff3f3f;
+}
+
+
+@media (max-width: 480px) {
+    .popup-content {
+        width: 90%; 
+        height: 60%; 
+    }
+}
+

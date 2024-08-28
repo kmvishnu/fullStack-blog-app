@@ -21,7 +21,7 @@ function BodyOfBlogs() {
     <div style={{ backgroundColor: "#000" }} className="card-container">
       {blogs?.map((obj,key) => {
         return (
-          <Card
+          <Card key={key}
             title={obj.title}
             authName={obj.userName}
             text={obj.content}

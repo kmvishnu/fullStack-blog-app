@@ -3,12 +3,11 @@ import "./Card.css";
 import BlogPopUp from "../BlogPopUp/BlogPopUp";  
 import { useBlogs } from "../../Hooks/useBlogs";
 
-const Card = ({ id, title, authName, text }) => {
+const Card = ({ id, title, authName, text , refreshBlogs}) => {
 
-    console.log("carrrrd",id)
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isEditPopupVisible, setIsEditPopupVisible] = useState(false);
-  const { viewPrivateBlogs, deleteBlog} = useBlogs();
+  const { deleteBlog} = useBlogs();
 
 
   const handleViewClick = () => {
@@ -17,6 +16,7 @@ const Card = ({ id, title, authName, text }) => {
 
   const handleClosePopup = () => {
     setIsPopupVisible(false);
+    refreshBlogs()
   };
 
   const handleEditClick = () => {
@@ -25,12 +25,14 @@ const Card = ({ id, title, authName, text }) => {
 
   const handleDeleteClick=async ()=>{
     await deleteBlog(id);
-    viewPrivateBlogs();
+    refreshBlogs()
   }
 
   const handleCloseEditPopup = () => {
  
     setIsEditPopupVisible(false);
+    refreshBlogs()
+
   };
 
   return (
@@ -46,7 +48,7 @@ const Card = ({ id, title, authName, text }) => {
       <p className="card-authName">{authName}</p>
       <p className="card-text">{text}</p>
 
-      {/* Popup for viewing the blog details */}
+      
       {isPopupVisible && (
         <div className="popup-overlay">
           <div className="popup-content">
@@ -57,7 +59,7 @@ const Card = ({ id, title, authName, text }) => {
         </div>
       )}
 
-      {/* Popup for editing the blog */}
+      
       {isEditPopupVisible && (
         <BlogPopUp
           closePopup={handleCloseEditPopup}

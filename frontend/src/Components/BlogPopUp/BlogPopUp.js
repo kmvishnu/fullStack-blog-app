@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./BlogPopUp.css";
-import { useNavigate } from "react-router-dom";
 import { useBlogs } from "../../Hooks/useBlogs";
 
 const BlogPopUp = ({ closePopup, blogData = null }) => {
   const [title, setTitle] = useState(blogData?.title || "");
   const [content, setContent] = useState(blogData?.content || "");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
   const { createBlog, editBlog } = useBlogs();  
 
   useEffect(() => {
-    console.log("ssdfsdf",blogData)
     if (blogData) {
       setTitle(blogData.title);
       setContent(blogData.content);
@@ -27,7 +25,6 @@ const BlogPopUp = ({ closePopup, blogData = null }) => {
     };
     try {
       setLoading(true);
-
       let response;
       if (blogData) {
         response = await editBlog({
@@ -37,21 +34,14 @@ const BlogPopUp = ({ closePopup, blogData = null }) => {
             content: content,
           },
         });
-        if (response.status === true) {
-            setLoading(false);
-            closePopup();
-            navigate("/myblogs", { replace: true });
-          }
       } else {
         response = await createBlog(blogPayload);
-        
-      if (response.status === "success") {
+      }
+  
+      if (response.status === true || response.status==='success') {
         setLoading(false);
         closePopup();
-        navigate("/home", { replace: true });
       }
-      }
-
     } catch (error) {
       console.error("Error submitting blog:", error);
       setLoading(false);
