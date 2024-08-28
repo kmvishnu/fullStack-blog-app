@@ -1,15 +1,16 @@
 import { useCallback, useState } from "react";
-import api from "../Components/Common/axios";
+import api, { useAxiosInterceptor } from "../Components/Common/axios";
 import { useDispatch } from "react-redux";
 
 export const useBlogs = () => {
+  useAxiosInterceptor(); // Set up the interceptor
   const [blogs, setBlogs] = useState([]);
   const [privateBlogs, setPrivateBlogs] = useState([]);
   const dispatch = useDispatch();
 
   const viewBlogs = useCallback(async () => {
     try {
-      const response = await api.get("/viewAllBlogs",dispatch);
+      const response = await api.get("/viewAllBlogs");
       setBlogs(response.data);
     } catch (error) {
       console.error("Error fetching blogs", error);
@@ -18,18 +19,15 @@ export const useBlogs = () => {
 
   const viewPrivateBlogs = useCallback(async () => {
     try {
-      const response = await api.get("/viewPrivateBlogs",dispatch);
+      const response = await api.get("/viewPrivateBlogs");
       setPrivateBlogs(response.data);
     } catch (error) {
-      console.error("Error fetching private blogs", error);
     }
   }, [dispatch]);
 
   const createBlog = async (payload) => {
     try {
-      const response = await api.post("/createBlog", payload, {
-        dispatch,
-      });
+      const response = await api.post("/createBlog", payload);
 
       await viewBlogs();
       await viewPrivateBlogs();
@@ -42,9 +40,7 @@ export const useBlogs = () => {
 
   const editBlog = async (payload) => {
     try {
-      const response = await api.put("/editBlog", payload, {
-        dispatch,
-      });
+      const response = await api.put("/editBlog", payload);
 
       await viewBlogs();
       await viewPrivateBlogs();
@@ -57,13 +53,10 @@ export const useBlogs = () => {
 
   const deleteBlog = async (id) => {
     try {
-      const response = await api.delete(`/deleteBlog/${id}`, {
-        dispatch,
-      });
+      const response = await api.delete(`/deleteBlog/${id}`);
       return response;
     } catch (error) {
       console.error("Error deleting blog", error);
-    } finally {
     }
   };
 

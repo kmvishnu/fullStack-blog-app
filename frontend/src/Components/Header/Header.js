@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import BlogPopUp from "../BlogPopUp/BlogPopUp"; 
+import BlogPopUp from "../BlogPopUp/BlogPopUp";
 import { useUser } from "../../Hooks/useUser";
 
-const Header = ({ isMyBlogsActive, refreshBlogs }) => { 
+const Header = ({ isMyBlogsActive, refreshBlogs }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(false); 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const navigate = useNavigate();
   const { logoutUser } = useUser();
 
@@ -27,7 +27,7 @@ const Header = ({ isMyBlogsActive, refreshBlogs }) => {
   };
 
   const closePopup = () => {
-    refreshBlogs()
+    refreshBlogs();
     setIsPopupOpen(false);
   };
 
@@ -37,8 +37,10 @@ const Header = ({ isMyBlogsActive, refreshBlogs }) => {
         BlogosHub
       </div>
       {isMyBlogsActive && (
-        <div className="create-blog-button" onClick={handleCreateBlogClick}>
-          Create Blog
+        <div className="create-blog-container">
+          <button className="create-blog-button" onClick={handleCreateBlogClick}>
+            Create Blog
+          </button>
         </div>
       )}
       {userName ? (
@@ -69,7 +71,7 @@ const Header = ({ isMyBlogsActive, refreshBlogs }) => {
           )}
         </div>
       )}
-      {isPopupOpen && <BlogPopUp closePopup={closePopup} refreshBlogs={refreshBlogs} />} 
+      {isPopupOpen && <BlogPopUp closePopup={closePopup} refreshBlogs={refreshBlogs} />}
     </header>
   );
 };

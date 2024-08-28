@@ -26,6 +26,19 @@
     position: relative;
 }
 
+.popup-header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    padding-bottom: 10px;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    height: 50px; /* Ensure enough height to align title and button */
+}
+
 /* Close button styling */
 .close-popup-button {
     background-color: #ff5f5f;

@@ -116,6 +116,8 @@ h2{
   @media (max-width: 500px) {
     .signUp-form {
       padding: 15px;
+    max-width: 350px;
+
     }
   
     .form-group input {

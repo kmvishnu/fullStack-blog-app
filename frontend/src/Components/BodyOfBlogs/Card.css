@@ -52,6 +52,16 @@
     justify-content: center;
 }
 
+.action-button {
+    background: none; /* No background color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1.5rem; /* Adjust font size */
+    color: #333; /* Set icon color */
+    transition: color 0.3s; /* Smooth color transition */
+    margin-bottom: 10px;
+}
+
 
 @media (min-width: 1200px) {
     .card-container {
@@ -102,14 +112,46 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 600px;   
-    height: 400px;  
+    width: 800px; /* Increased width */
+    height: 500px; /* Increased height */
     box-sizing: border-box;
     text-align: left;
-    overflow-y: auto; 
+    overflow: hidden; /* Hide overflow by default */
     position: relative;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word; /* Ensures long words break to the next line */
+    word-break: break-word; /* Breaks long words at any character to fit */
 }
 
+.popup-header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    padding: 10px 20px; /* Adjust padding to ensure spacing */
+    z-index: 10;
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    height: 60px; /* Ensure enough height to align title and button */
+    box-sizing: border-box; /* Ensure padding and border are included in the height */
+}
+
+.popup-title {
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1.5; /* Adjust line-height if needed */
+}
+
+.popup-body {
+    flex-grow: 1; /* Take up the remaining space */
+    padding-top: 10px; /* Ensure there's space below the header */
+    overflow-y: auto; /* Vertical scrolling */
+    overflow-x: hidden; /* Disable horizontal scrolling */
+    word-wrap: break-word; /* Ensures long words break to the next line */
+    word-break: break-word; /* Breaks long words at any character to fit */
+}
 
 .close-popup-button {
     background-color: #ff5f5f;
@@ -118,21 +160,17 @@
     padding: 8px 16px;
     cursor: pointer;
     border-radius: 4px;
-    position: absolute; 
-    top: 0;
-    right: 10px;
     transition: background-color 0.3s;
+    align-self: center; /* Align button vertically */
 }
 
 .close-popup-button:hover {
     background-color: #ff3f3f;
 }
 
-
 @media (max-width: 480px) {
     .popup-content {
-        width: 90%; 
-        height: 60%; 
+        width: 90%;
+        height: 80%; /* Adjusted for better fit on small screens */
     }
 }
-

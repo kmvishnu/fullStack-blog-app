@@ -51,12 +51,16 @@ const Card = ({ id, title, authName, text , refreshBlogs}) => {
       
       {isPopupVisible && (
         <div className="popup-overlay">
-          <div className="popup-content">
-            <h2>{title}</h2>
-            <p>{text}</p>
-            <button onClick={handleClosePopup} className="close-popup-button">Close</button>
-          </div>
+        <div className="popup-content">
+            <div className="popup-header">
+                <h2 className="popup-title">{title}</h2>
+                <button onClick={handleClosePopup} className="close-popup-button">Close</button>
+            </div>
+            <div className="popup-body">
+                <p>{text}</p>
+            </div>
         </div>
+    </div>
       )}
 
       

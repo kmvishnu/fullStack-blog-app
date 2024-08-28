@@ -116,7 +116,10 @@ const refreshToken = async (req, res) => {
   if (!refreshToken) return res.status(401);
 
   const userId = await verifyRefreshToken(refreshToken);
-  if (!userId) return res.status(403);
+  if (userId===null){
+
+    return res.status(403).json("RefreshToken Expired")
+  } 
 
   jwt.verify(refreshToken, jwtRefreshKey, async (err, user) => {
     if (err || !user) return res.status(403);

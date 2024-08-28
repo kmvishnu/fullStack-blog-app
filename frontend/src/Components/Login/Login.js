@@ -15,7 +15,7 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
-  const { loginUser } = useUser();
+  const { loginUser, error } = useUser();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -68,6 +68,8 @@ const Login = () => {
         sessionStorage.setItem("isAuthenticated", "true");
         navigate("/home", { replace: true });
       }
+      setLoading(false);
+
     } catch (error) {
       console.error("Error logging in:", error);
       setLoading(false);
@@ -109,6 +111,9 @@ const Login = () => {
         <button type="submit" className="login-button" disabled={!isFormValid}>
           {loading ? "Loading..." : "Login"}
         </button>
+        {error && (
+            <p className="error-message">{error}</p>
+          )}
         <br />
         <p
           onClick={() => {

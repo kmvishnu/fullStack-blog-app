@@ -2,8 +2,11 @@ import axios from "axios";
 import config from "../config";
 import { useDispatch } from "react-redux";
 import { clearToken, setToken } from "../Features/User/userSlice";
+import { useState } from "react";
 
 export const useUser = () => {
+
+  const [error,setError] = useState("")
 
   const dispatch = useDispatch();
 
@@ -32,7 +35,8 @@ export const useUser = () => {
       return response.data;
     } catch (error) {
       console.error("Login request failed:", error);
-      return { status: "error" };
+      setError(error.response.data.error)
+      return { status: "error", message : "Invalid email ID or Password" };
     }
 
   };
@@ -48,6 +52,7 @@ export const useUser = () => {
   return {
     signUpUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    error
   };
 };

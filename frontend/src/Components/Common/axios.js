@@ -1,7 +1,10 @@
 import axios from "axios";
 import config from "../../config";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import { clearToken, setAuthToken } from "../../Features/User/userSlice";
+import { useNavigate } from "react-router-dom"; 
+import { useDispatch } from "react-redux"; 
+import { useEffect } from "react";
 
 const api = axios.create({
   baseURL: config.apiBaseUrl,
@@ -17,42 +20,52 @@ const isTokenValid = (token) => {
   }
 };
 
-async function setRefreshToken(refreshToken, dispatch) {
-  try {
-    const response = await axios.post(`${config.apiBaseUrl}/refreshToken`, { refreshToken });
-    const { token } = response.data;
-    localStorage.setItem('token', token);
-    dispatch(setAuthToken({ token, refreshToken }));
-    return token;
-  } catch (error) {
-    console.error('Failed to refresh token:', error);
-    dispatch(clearToken());
-    localStorage.removeItem('token');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
-    throw new Error('Failed to refresh token');
-  }
-}
+export const useAxiosInterceptor = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-api.interceptors.request.use(
-  async (config) => {
-    let token = localStorage.getItem("token");
-    const refreshToken = localStorage.getItem("refreshToken");
-    const dispatch = config.dispatch; 
+  useEffect(() => {
+    const setRefreshToken = async (refreshToken) => {
+      try {
+        const response = await axios.post(`${config.apiBaseUrl}/refreshToken`, { refreshToken });
+        const { token } = response.data;
+        localStorage.setItem('token', token);
+        dispatch(setAuthToken({ token, refreshToken }));
+        return token;
+      } catch (error) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+        dispatch(clearToken());
+        navigate("/login");
+        throw new Error('Failed to refresh token');
+      }
+    };
 
-    if (!isTokenValid(token) && refreshToken) {
-      token = await setRefreshToken(refreshToken, dispatch);
-    }
+    const requestInterceptor = api.interceptors.request.use(
+      async (config) => {
+        let token = localStorage.getItem("token");
+        const refreshToken = localStorage.getItem("refreshToken");
 
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
+        if (!isTokenValid(token) && refreshToken) {
+          token = await setRefreshToken(refreshToken);
+        }
 
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+        if (token) {
+          config.headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      api.interceptors.request.eject(requestInterceptor);
+    };
+  }, [navigate, dispatch]);
+};
 
 export default api;
