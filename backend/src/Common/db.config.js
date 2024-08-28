@@ -6,7 +6,6 @@ dotenv.config();
 const mongoUsername = process.env.mongoUsername;
 const mongoPassword = process.env.mongoPassword;
 
-console.log("mongoo", mongoUsername, mongoPassword);
 
 const connectionString = `mongodb+srv://${mongoUsername}:${mongoPassword}@blogoshub.ltkqqlf.mongodb.net/?retryWrites=true&w=majority&appName=BlogosHub`;
 

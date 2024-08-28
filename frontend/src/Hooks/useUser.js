@@ -27,7 +27,7 @@ export const useUser = () => {
       const { token, name, refreshToken } = response.data;
       localStorage.setItem("token", token);
       localStorage.setItem("refreshToken", refreshToken);
-      localStorage.setItem("user", JSON.stringify(name));
+      localStorage.setItem("user", name);
       dispatch(setToken({ token, name, refreshToken }));
       return response.data;
     } catch (error) {

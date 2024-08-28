@@ -19,7 +19,7 @@ const isTokenValid = (token) => {
 
 async function setRefreshToken(refreshToken, dispatch) {
   try {
-    const response = await axios.post(`${config.apiBaseUrl}/v2/refreshToken`, { refreshToken });
+    const response = await axios.post(`${config.apiBaseUrl}/refreshToken`, { refreshToken });
     const { token } = response.data;
     localStorage.setItem('token', token);
     dispatch(setAuthToken({ token, refreshToken }));

@@ -5,14 +5,13 @@ import { useSelector } from "react-redux";
 import BlogPopUp from "../BlogPopUp/BlogPopUp"; 
 import { useUser } from "../../Hooks/useUser";
 
-const Header = (props) => {
+const Header = ({ isMyBlogsActive, refreshBlogs }) => { 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false); 
   const navigate = useNavigate();
   const { logoutUser } = useUser();
 
   const userName = useSelector((state) => state.user.user);
-  console.log("userrr", userName);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -28,6 +27,7 @@ const Header = (props) => {
   };
 
   const closePopup = () => {
+    refreshBlogs()
     setIsPopupOpen(false);
   };
 
@@ -36,14 +36,14 @@ const Header = (props) => {
       <div className="logo" onClick={() => navigate("/home")}>
         BlogosHub
       </div>
-      {props.isMyBlogsActive && (
+      {isMyBlogsActive && (
         <div className="create-blog-button" onClick={handleCreateBlogClick}>
           Create Blog
         </div>
       )}
       {userName ? (
         <div className="user-icon" onClick={toggleMenu}>
-          {userName.charAt(1).toUpperCase()}
+          {userName.charAt(0).toUpperCase()}
         </div>
       ) : (
         <div className="hamburger" onClick={toggleMenu}>
@@ -54,7 +54,7 @@ const Header = (props) => {
         <div className="menu">
           {userName ? (
             <>
-              {props.isMyBlogsActive ? (
+              {isMyBlogsActive ? (
                 <p onClick={() => navigate("/home")}>Home</p>
               ) : (
                 <p onClick={() => navigate("/myblogs")}>My Blogs</p>
@@ -69,7 +69,7 @@ const Header = (props) => {
           )}
         </div>
       )}
-      {isPopupOpen && <BlogPopUp closePopup={closePopup} />} 
+      {isPopupOpen && <BlogPopUp closePopup={closePopup} refreshBlogs={refreshBlogs} />} 
     </header>
   );
 };

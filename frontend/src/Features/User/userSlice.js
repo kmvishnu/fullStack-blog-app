@@ -17,7 +17,7 @@ const userSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload.token;
       state.refreshToken = action.payload.refreshToken;
-      state.user = action.payload.user;
+      state.user = action.payload.name;
       
     },
     clearToken: (state) => {
