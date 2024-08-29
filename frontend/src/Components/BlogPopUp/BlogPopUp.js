@@ -127,7 +127,7 @@ const BlogPopUp = ({ closePopup, blogData = null }) => {
           onClick={handleSubmit}
           disabled={!isFormValid}
         >
-          {loading ? "Loading..." : "SignUp"}
+          {loading ? "Loading..." : "Submit"}
         </button>
         </div>
       </div>
