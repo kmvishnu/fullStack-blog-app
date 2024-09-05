@@ -24,8 +24,8 @@ const BlogPopUp = ({ closePopup, blogData = null }) => {
     if (!title) {
       setTitleError("title is required");
       return false;
-    } else if (title.length <= 2 || title.length >= 30) {
-      setTitleError("Title must be between 2 and 30 characters");
+    } else if (title.length <= 2 || title.length >= 50) {
+      setTitleError("Title must be between 2 and 50 characters");
       return false;
     } else {
       setTitleError("");
@@ -37,8 +37,8 @@ const BlogPopUp = ({ closePopup, blogData = null }) => {
     if (!content) {
       setContentError("content is required");
       return false;
-    } else if (content.length <= 10 || content.length >= 30) {
-      setContentError("Content must be between 10 and 500 characters");
+    } else if (content.length <= 10 || content.length >= 1000) {
+      setContentError("Content must be between 10 and 1000 characters");
       return false;
     } else {
       setContentError("");
