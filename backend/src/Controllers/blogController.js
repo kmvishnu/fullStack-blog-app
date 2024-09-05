@@ -67,8 +67,8 @@ const editTodo = async (req, res) => {
   const { title,content,id } = req.body.data;
 
 
-  if (!title || title.length < 2 || title.length > 30) {
-    return res.status(400).json({ status: "error", message: "title must be between 2 and 30 characters long." });
+  if (!title || title.length < 2 || title.length > 50) {
+    return res.status(400).json({ status: "error", message: "title must be between 2 and 50 characters long." });
   }
 
   if (!content || content.length < 10 || content.length > 5000) {
