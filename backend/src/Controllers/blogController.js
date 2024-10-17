@@ -1,6 +1,7 @@
 const {insertBlog} = require("../Components/BlogComponent");
 const BlogsModel = require("../Models/blogMongo");
 
+
 const addBlog = async (req, res) => {
   const { title,content } = req.body.data;
 
