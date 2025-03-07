@@ -17,7 +17,7 @@
     "express": "^5.0.0-alpha.8",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.8.0",
-    "mongoose": "^8.5.3",
+    "mongoose": "^8.9.5",
     "redis": "^4.7.0"
   }
 }
